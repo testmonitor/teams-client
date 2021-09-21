@@ -52,6 +52,20 @@ class MessagesTest extends TestCase
     }
 
     /** @test */
+    public function it_should_throw_an_unauthorized_exception_when_client_is_provided_with_an_empty_webhook()
+    {
+        // Given
+        $teams = new Client('');
+
+        $this->expectException(UnauthorizedException::class);
+
+        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+
+        // When
+        $teams->postMessage($card);
+    }
+
+    /** @test */
     public function it_should_throw_an_unauthorized_exception_when_client_lacks_authorization_to_post_a_message()
     {
         // Given
@@ -68,7 +82,7 @@ class MessagesTest extends TestCase
         $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
 
         // When
-        $result = $teams->postMessage($card);
+        $teams->postMessage($card);
     }
 
     /** @test */
