@@ -10,8 +10,8 @@
 
 This package provides a very basic, convenient, and unified wrapper for sending messages to Microsoft Teams using an incoming webhook.
 
-It's mostly a based on the [php-microsoft-teams-connector](https://github.com/sebbmeyer/php-microsoft-teams-connector), but uses Guzzle 
-instead of the PHP CURL extension. This package exposes the excellent php-microsoft-teams-connector Card objects to build all kinds of 
+It's mostly a based on Sebastian Bretschneider's [PHP Microsoft Teams Connector](https://github.com/sebbmeyer/php-microsoft-teams-connector), but uses Guzzle 
+instead of the PHP CURL extension. This package exposes the excellent Card objects from PHP Microsoft Teams Connector to build all kinds of 
 messages using a fluent PHP syntax.
 
 ## Table of Contents
@@ -43,13 +43,13 @@ You're all set up now!
 
 Before you can post messages, you need to set up an incoming webhook in Teams:
 
-- Launch the Microsoft Teams application.
-- Select the Teams tab.
+- Launch the **Microsoft Teams** application.
+- Select the **Teams** tab.
 - Select a team.
-- Right-click on the channel you want the messages to be delivered and select Connectors.
-- Select the "Incoming Webhook" connector and click Add.
+- Right-click on the channel you want the messages to be delivered and select **Connectors**.
+- Select the **"Incoming Webhook"** connector and click Add.
 - Provide your webhook with a name and optionally, a logo.
-- Click Create and your webhook URL will be provided.
+- Click **Create** and your webhook URL will be provided.
 
 Use the webhook URL to create a new client instance:
 
@@ -62,12 +62,15 @@ $teams = new \TestMonitor\Teams\Client('https://webhook.url/');
 Post a simple message to Teams:
 
 ```php
-$card = new \TestMonitor\Teams\Resources\SimpleCard(['title' => 'Some title', 'text' => 'Hello World!']);
+$card = new \TestMonitor\Teams\Resources\SimpleCard([
+    'title' => 'Some title', 
+    'text' => 'Hello World!',
+]);
 
 $teams->postMessage($card);
 ```
 
-Block Kit allows you to create way more comprehensive messages. Here's another example:
+The built-in connector package allows way more comprehensive messages. Here's another example:
 
 ```php
 $user = (object) ['name' => 'John Doe'];
@@ -86,7 +89,7 @@ $teams->postMessage($card);
 ```
 
 For more information on composing these messages, head over to 
-[php-microsoft-teams-connector](https://github.com/sebbmeyer/php-microsoft-teams-connector) 
+[PHP Microsoft Teams Connector](https://github.com/sebbmeyer/php-microsoft-teams-connector) 
 for more examples or refer to Microsoft's [Build cards and task modules documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards-and-task-modules).
 
 ## Tests
