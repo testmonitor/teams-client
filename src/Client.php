@@ -37,6 +37,7 @@ class Client
      * Returns an Guzzle client instance.
      *
      * @throws \TestMonitor\Teams\Exceptions\UnauthorizedException
+     *
      * @return \GuzzleHttp\Client
      */
     protected function client()
@@ -46,14 +47,14 @@ class Client
         }
 
         return $this->client ?? new \GuzzleHttp\Client([
-                'base_uri' => $this->webhookUrl,
-                'http_errors' => false,
-                'timeout' => 10,
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json',
-                ],
-            ]);
+            'base_uri' => $this->webhookUrl,
+            'http_errors' => false,
+            'timeout' => 10,
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+        ]);
     }
 
     /**

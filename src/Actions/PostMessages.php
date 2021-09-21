@@ -17,6 +17,7 @@ trait PostMessages
      * @throws \TestMonitor\Teams\Exceptions\NotFoundException
      * @throws \TestMonitor\Teams\Exceptions\UnauthorizedException
      * @throws \TestMonitor\Teams\Exceptions\ValidationException
+     *
      * @return bool
      */
     public function postMessage(Card $card)
