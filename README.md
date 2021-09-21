@@ -5,7 +5,7 @@
 [![Travis Build](https://travis-ci.com/testmonitor/teams-client.svg?branch=main)](https://travis-ci.com/testmonitor/teams-client)
 [![Code Coverage](https://scrutinizer-ci.com/g/testmonitor/teams-client/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/testmonitor/teams-client/?branch=main)
 [![Code Quality](https://scrutinizer-ci.com/g/testmonitor/teams-client/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/testmonitor/teams-client/?branch=main)
-[![StyleCI](https://styleci.io/repos/401647581/shield)](https://styleci.io/repos/401647581)
+[![StyleCI](https://styleci.io/repos/406275668/shield)](https://styleci.io/repos/406275668)
 [![License](https://poser.pugx.org/testmonitor/teams-client/license)](https://packagist.org/packages/testmonitor/teams-client)
 
 This package provides a very basic, convenient, and unified wrapper for sending messages to Microsoft Teams using an incoming webhook.
