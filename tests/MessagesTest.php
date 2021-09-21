@@ -42,7 +42,7 @@ class MessagesTest extends TestCase
         $response->shouldReceive('getStatusCode')->andReturn(200);
         $response->shouldReceive('getBody')->andReturn(1);
 
-        $card  = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
 
         // When
         $result = $teams->postMessage($card);
@@ -65,7 +65,7 @@ class MessagesTest extends TestCase
 
         $this->expectException(UnauthorizedException::class);
 
-        $card  = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
 
         // When
         $result = $teams->postMessage($card);
@@ -84,7 +84,7 @@ class MessagesTest extends TestCase
 
         $this->expectException(NotFoundException::class);
 
-        $card  = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
 
         // When
         $teams->postMessage($card);
