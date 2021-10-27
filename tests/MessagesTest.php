@@ -143,4 +143,24 @@ class MessagesTest extends TestCase
         // When
         $teams->postMessage($card);
     }
+
+    /** @test */
+    public function it_should_throw_a_failed_action_exception_when_client_uses_an_invalid_submit_method()
+    {
+        // Given
+        $teams = new Client($this->webhookUrl);
+
+        $teams->setClient($service = Mockery::mock('\GuzzleHttp\Client'));
+
+        $service->shouldReceive('request')->once()->andReturn($response = Mockery::mock('Psr\Http\Message\ResponseInterface'));
+        $response->shouldReceive('getStatusCode')->andReturn(405);
+        $response->shouldReceive('getBody')->andReturn('');
+
+        $this->expectException(FailedActionException::class);
+
+        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+
+        // When
+        $teams->postMessage($card);
+    }
 }
