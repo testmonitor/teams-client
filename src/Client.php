@@ -140,7 +140,7 @@ class Client
             throw new UnauthorizedException();
         }
 
-        if ($response->getStatusCode() == 400) {
+        if ($response->getStatusCode() == 400 || $response->getStatusCode() == 405) {
             throw new FailedActionException((string) $response->getBody());
         }
 
