@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/testmonitor/teams-client/v/stable)](https://packagist.org/packages/testmonitor/teams-client)
 [![CircleCI](https://img.shields.io/circleci/project/github/testmonitor/teams-client.svg)](https://circleci.com/gh/testmonitor/teams-client)
-[![Travis Build](https://travis-ci.com/testmonitor/teams-client.svg?branch=main)](https://travis-ci.com/testmonitor/teams-client)
+[![Travis Build](https://travis-ci.com/testmonitor/teams-client.svg?branch=main)](https://app.travis-ci.com/github/testmonitor/teams-client)
 [![Code Coverage](https://scrutinizer-ci.com/g/testmonitor/teams-client/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/testmonitor/teams-client/?branch=main)
 [![Code Quality](https://scrutinizer-ci.com/g/testmonitor/teams-client/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/testmonitor/teams-client/?branch=main)
 [![StyleCI](https://styleci.io/repos/406275668/shield)](https://styleci.io/repos/406275668)
@@ -10,8 +10,8 @@
 
 This package provides a very basic, convenient, and unified wrapper for sending messages to Microsoft Teams using an incoming webhook.
 
-It's mostly a based on Sebastian Bretschneider's [PHP Microsoft Teams Connector](https://github.com/sebbmeyer/php-microsoft-teams-connector), but uses Guzzle 
-instead of the PHP CURL extension. This package exposes the excellent Card objects from PHP Microsoft Teams Connector to build all kinds of 
+It's mostly a based on Sebastian Bretschneider's [PHP Microsoft Teams Connector](https://github.com/sebbmeyer/php-microsoft-teams-connector), but uses Guzzle
+instead of the PHP CURL extension. This package exposes the excellent Card objects from PHP Microsoft Teams Connector to build all kinds of
 messages using a fluent PHP syntax.
 
 ## Table of Contents
@@ -24,7 +24,7 @@ messages using a fluent PHP syntax.
 - [Contributing](#contributing)
 - [Credits](#credits)
 - [License](#license)
-  
+
 ## Installation
 
 To install the client you need to require the package using composer:
@@ -63,7 +63,7 @@ Post a simple message to Teams:
 
 ```php
 $card = new \TestMonitor\Teams\Resources\SimpleCard([
-    'title' => 'Some title', 
+    'title' => 'Some title',
     'text' => 'Hello World!',
 ]);
 
@@ -84,12 +84,12 @@ $card->setColor('7FB11B')
         'Resolution' => '**Unresolved**',
     ])
     ->addAction('Open in TestMonitor', 'https://www.testmonitor.com/');
-    
+
 $teams->postMessage($card);
 ```
 
-For more information on composing these messages, head over to 
-[PHP Microsoft Teams Connector](https://github.com/sebbmeyer/php-microsoft-teams-connector) 
+For more information on composing these messages, head over to
+[PHP Microsoft Teams Connector](https://github.com/sebbmeyer/php-microsoft-teams-connector)
 for more examples or refer to Microsoft's [Build cards and task modules documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards-and-task-modules).
 
 ## Tests
@@ -97,7 +97,7 @@ for more examples or refer to Microsoft's [Build cards and task modules document
 The package contains integration tests. You can run them using PHPUnit.
 
     $ vendor/bin/phpunit
-    
+
 ## Changelog
 
 Refer to [CHANGELOG](CHANGELOG.md) for more information.
