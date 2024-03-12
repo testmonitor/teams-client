@@ -3,6 +3,7 @@
 namespace TestMonitor\Teams\Actions;
 
 use TestMonitor\Teams\Resources\Card;
+use TestMonitor\Teams\Exceptions\FailedActionException;
 use TestMonitor\Teams\Exceptions\UnauthorizedException;
 
 trait PostMessages
@@ -29,6 +30,10 @@ trait PostMessages
         $response = $this->post($this->webhookUrl, [
             'json' => $card->getMessage(),
         ]);
+
+        if ($response !== 1) {
+            throw new FailedActionException('Failed posting message.');
+        }
 
         return $response === 1;
     }
