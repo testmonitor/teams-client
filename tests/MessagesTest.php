@@ -145,6 +145,26 @@ class MessagesTest extends TestCase
     }
 
     /** @test */
+    public function it_should_throw_a_failed_action_exception_when_client_sends_a_server_error()
+    {
+        // Given
+        $teams = new Client($this->webhookUrl);
+
+        $teams->setClient($service = Mockery::mock('\GuzzleHttp\Client'));
+
+        $service->shouldReceive('request')->once()->andReturn($response = Mockery::mock('Psr\Http\Message\ResponseInterface'));
+        $response->shouldReceive('getStatusCode')->andReturn(503);
+        $response->shouldReceive('getBody')->andReturn(\GuzzleHttp\Psr7\Utils::streamFor(''));
+
+        $this->expectException(FailedActionException::class);
+
+        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+
+        // When
+        $teams->postMessage($card);
+    }
+
+    /** @test */
     public function it_should_throw_a_failed_action_exception_when_client_uses_an_invalid_submit_method()
     {
         // Given
@@ -156,7 +176,7 @@ class MessagesTest extends TestCase
         $response->shouldReceive('getStatusCode')->andReturn(405);
         $response->shouldReceive('getBody')->andReturn(\GuzzleHttp\Psr7\Utils::streamFor(''));
 
-        $this->expectException(FailedActionException::class);
+        $this->expectException(NotFoundException::class);
 
         $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
 
