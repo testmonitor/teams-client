@@ -132,9 +132,7 @@ class Client
             throw new ValidationException(json_decode((string) $response->getBody(), true));
         }
 
-        if ($response->getStatusCode() == 404 ||
-            $response->getStatusCode() == 405 ||
-            $response->getStatusCode() == 410) {
+        if (in_array($response->getStatusCode(), [404, 405, 410])) {
             throw new NotFoundException();
         }
 
