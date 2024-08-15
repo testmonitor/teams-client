@@ -32,6 +32,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.0",
         "sebbmeyer/php-microsoft-teams-connector": "^0.2.2"
     },
     "require-dev": {
