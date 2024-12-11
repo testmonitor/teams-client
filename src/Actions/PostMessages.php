@@ -31,10 +31,10 @@ trait PostMessages
             'json' => $card->getMessage(),
         ]);
 
-        if ($response !== 1) {
+        if ($response !== 1 && $response !== '') {
             throw new FailedActionException('Failed posting message.');
         }
 
-        return $response === 1;
+        return $response === 1 || $response === '';
     }
 }

@@ -30,10 +30,16 @@
         }
     ],
     "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/testmonitor/php-microsoft-teams-connector"
+        }
+    ],
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.0",
-        "sebbmeyer/php-microsoft-teams-connector": "^0.2.2"
+        "sebbmeyer/php-microsoft-teams-connector": "dev-master"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",

@@ -2,9 +2,9 @@
 
 namespace TestMonitor\Teams\Resources;
 
-use Sebbmyr\Teams\TeamsConnectorInterface;
+use Sebbmyr\Teams\Cards\Adaptive\CustomAdaptiveCard;
 
-interface Card extends TeamsConnectorInterface
+class Card extends CustomAdaptiveCard
 {
     //
 }

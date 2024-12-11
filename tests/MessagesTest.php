@@ -5,11 +5,12 @@ namespace TestMonitor\Teams\Tests;
 use Mockery;
 use TestMonitor\Teams\Client;
 use PHPUnit\Framework\TestCase;
-use TestMonitor\Teams\Resources\SimpleCard;
+use TestMonitor\Teams\Resources\Card;
 use TestMonitor\Teams\Exceptions\NotFoundException;
 use TestMonitor\Teams\Exceptions\ValidationException;
 use TestMonitor\Teams\Exceptions\FailedActionException;
 use TestMonitor\Teams\Exceptions\UnauthorizedException;
+use TestMonitor\Teams\Resources\Card\Elements\TextBlock;
 
 class MessagesTest extends TestCase
 {
@@ -42,7 +43,9 @@ class MessagesTest extends TestCase
         $response->shouldReceive('getStatusCode')->andReturn(200);
         $response->shouldReceive('getBody')->andReturn(\GuzzleHttp\Psr7\Utils::streamFor(1));
 
-        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new Card;
+        $textBlock = new TextBlock('Hello text block');
+        $card->addElement($textBlock);
 
         // When
         $result = $teams->postMessage($card);
@@ -59,7 +62,9 @@ class MessagesTest extends TestCase
 
         $this->expectException(UnauthorizedException::class);
 
-        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new Card;
+        $textBlock = new TextBlock('Hello text block');
+        $card->addElement($textBlock);
 
         // When
         $teams->postMessage($card);
@@ -79,7 +84,9 @@ class MessagesTest extends TestCase
 
         $this->expectException(UnauthorizedException::class);
 
-        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new Card;
+        $textBlock = new TextBlock('Hello text block');
+        $card->addElement($textBlock);
 
         // When
         $teams->postMessage($card);
@@ -98,7 +105,9 @@ class MessagesTest extends TestCase
 
         $this->expectException(NotFoundException::class);
 
-        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new Card;
+        $textBlock = new TextBlock('Hello text block');
+        $card->addElement($textBlock);
 
         // When
         $teams->postMessage($card);
@@ -118,7 +127,9 @@ class MessagesTest extends TestCase
 
         $this->expectException(ValidationException::class);
 
-        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new Card;
+        $textBlock = new TextBlock('Hello text block');
+        $card->addElement($textBlock);
 
         // When
         $teams->postMessage($card);
@@ -138,7 +149,9 @@ class MessagesTest extends TestCase
 
         $this->expectException(FailedActionException::class);
 
-        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new Card;
+        $textBlock = new TextBlock('Hello text block');
+        $card->addElement($textBlock);
 
         // When
         $teams->postMessage($card);
@@ -158,7 +171,9 @@ class MessagesTest extends TestCase
 
         $this->expectException(FailedActionException::class);
 
-        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new Card;
+        $textBlock = new TextBlock('Hello text block');
+        $card->addElement($textBlock);
 
         // When
         $teams->postMessage($card);
@@ -178,7 +193,9 @@ class MessagesTest extends TestCase
 
         $this->expectException(NotFoundException::class);
 
-        $card = new SimpleCard(['title' => 'Hello', 'text' => 'World']);
+        $card = new Card;
+        $textBlock = new TextBlock('Hello text block');
+        $card->addElement($textBlock);
 
         // When
         $teams->postMessage($card);
