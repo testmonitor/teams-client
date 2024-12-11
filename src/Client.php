@@ -107,7 +107,7 @@ class Client
             $payload
         );
 
-        if (! in_array($response->getStatusCode(), [200, 201, 203, 204, 206])) {
+        if (! in_array($response->getStatusCode(), [200, 201, 202, 203, 204, 206])) {
             return $this->handleRequestError($response);
         }
 
