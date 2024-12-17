@@ -9,8 +9,7 @@
 This package provides a very basic, convenient, and unified wrapper for sending messages to Microsoft Teams using an incoming webhook.
 
 It's mostly a based on Sebastian Bretschneider's [PHP Microsoft Teams Connector](https://github.com/sebbmeyer/php-microsoft-teams-connector), but uses Guzzle
-instead of the PHP CURL extension. This package exposes the excellent Card objects from PHP Microsoft Teams Connector to build all kinds of
-messages using a fluent PHP syntax.
+instead of the PHP CURL extension. This package leverages Microsoft Teams Adaptive Cards, making it a great fit for Power Automate.
 
 ## Table of Contents
 
@@ -43,11 +42,14 @@ Before you can post messages, you need to set up an incoming webhook in Teams:
 
 - Launch the **Microsoft Teams** application.
 - Select the **Teams** tab.
-- Select a team.
-- Right-click on the channel you want the messages to be delivered and select **Connectors**.
-- Select the **"Incoming Webhook"** connector and click Add.
-- Provide your webhook with a name and optionally, a logo.
-- Click **Create** and your webhook URL will be provided.
+- Locate the channel where you want notifications delivered, then click the three dots (More options) next to it.
+- Select **Workflows** from the dropdown menu.
+- In the search bar, type "webhook".
+- Choose the **Post to a channel when a webhook request is received** template.
+- Enter a name for the workflow or use the default name.
+- Click **Next**.
+- Confirm the selected **Team** and **Channel**.
+- Click **Add workflow** and your webhook URL will be provided.
 
 Use the webhook URL to create a new client instance:
 
@@ -60,35 +62,37 @@ $teams = new \TestMonitor\Teams\Client('https://webhook.url/');
 Post a simple message to Teams:
 
 ```php
-$card = new \TestMonitor\Teams\Resources\SimpleCard([
-    'title' => 'Some title',
-    'text' => 'Hello World!',
-]);
+$card = new \TestMonitor\Teams\Resources\Card;
+
+$card->addElement(
+    new \TestMonitor\Teams\Resources\Card\Elements\TextBlock('Simple heading')
+);
 
 $teams->postMessage($card);
 ```
 
-The built-in connector package allows way more comprehensive messages. Here's another example:
+Adaptive cards allow way more comprehensive messages. Here's another example:
 
 ```php
-$user = (object) ['name' => 'John Doe'];
+$card = new \TestMonitor\Teams\Resources\Card;
 
-$card = new \TestMonitor\Teams\Resources\CustomCard('New Issue', "{$user->name} created a new issue");
+$title = new \TestMonitor\Teams\Resources\Card\Elements\TextBlock('Simple heading');
+$facts = new \TestMonitor\Teams\Resources\Card\Elements\FactSet(
+    new \TestMonitor\Teams\Resources\Card\Elements\Fact('Status', 'Completed'),
+    new \TestMonitor\Teams\Resources\Card\Elements\Fact('Category', 'Feature request'),
+);
+$action = new \TestMonitor\Teams\Resources\Card\Actions\OpenUrl('https://www.testmonitor.com/');
 
-$card->setColor('7FB11B')
-    ->addFacts('Issue **I365**', [
-        'Status' => '**Open**',
-        'Priority' => '**High**',
-        'Resolution' => '**Unresolved**',
-    ])
-    ->addAction('Open in TestMonitor', 'https://www.testmonitor.com/');
+$card->addElement($title)
+     ->addElement($facts)
+     ->addAction($action);
 
 $teams->postMessage($card);
 ```
 
 For more information on composing these messages, head over to
 [PHP Microsoft Teams Connector](https://github.com/sebbmeyer/php-microsoft-teams-connector)
-for more examples or refer to Microsoft's [Build cards and task modules documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards-and-task-modules).
+for more examples or refer to Microsoft's documentation on [Adaptive Cards](https://adaptivecards.io/).
 
 ## Tests
 
